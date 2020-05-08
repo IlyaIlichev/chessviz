@@ -433,6 +433,17 @@ int Check(int x1, int x2, int y1, int y2, char table[][9])
             }
             break;
 
+            case 'K':
+                if (CheckFriend(x2, y2, table)) {
+                    if (((y2 - y1 >= -1) && (y2 - y1 <= 1))
+                        && ((x2 - x1 >= -1) && (x2 - x1 <= 1))) {
+                            flag = 1;
+                        }
+                    }
+                }
+                break;
+
+
         default:
             cout << "\nERROR\n";
             return 0;
@@ -680,6 +691,15 @@ int Check(int x1, int x2, int y1, int y2, char table[][9])
                             }
                         }
                         break;
+
+                        case 'k':
+                            if (CheckFriend(x2, y2, table)) {
+                                if (((y2 - y1 >= -1) && (y2 - y1 <= 1))
+                                    && ((x2 - x1 >= -1) && (x2 - x1 <= 1))) {
+                                        flag = 1;
+                                }
+                            }
+                            break;
 
           default:
             cout << "\nERROR\n";
