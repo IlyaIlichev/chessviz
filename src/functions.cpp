@@ -145,7 +145,7 @@ void move(char table[][9])
       cout << "\nERROR\n";
       return;
     }
-    if(Check(x1,x2,y1,y2,table,turn)){
+    if(Check(x1,x2,y1,y2,table)){
       table[x2][y2] = table[x1][y1];
       table[x1][y1] = ' ';
       if(team==0)
@@ -155,7 +155,7 @@ void move(char table[][9])
     }
 }
 
-int Check(int x1, int x2, int y1, int y2, char table[][9], string turn)
+int Check(int x1, int x2, int y1, int y2, char table[][9])
 {
     int flag = 0;
     if ((x1 == x2) && (x1 == y2)) {
@@ -182,7 +182,54 @@ int Check(int x1, int x2, int y1, int y2, char table[][9], string turn)
             if ((x1 - x2 == 1) && (table[x2][x2] != ' ') && ((y1 - y2 == 1) || (y2 - y1 == 1)))
               flag = 1;
             break;
-          default:
+
+          case 'R':
+            if ((y1 == y2) && (x1 != x2)) {
+              if (x1 > x2) {
+                for (int i = x1 - 1; i > x2; i--) {
+                  if (table[i][y1] != ' ') {
+                    cout << "\n ERROR: Rook can't reach the "
+                            "position through the figure' \n \n";
+                    return 0;
+                  }
+                }
+                flag = 1;
+              }
+              if (x1 < x2) {
+                for (int i = x2 - 1; i > x1; i--) {
+                  if (table[i][y1] != ' ') {
+                    cout << "\n ERROR: Rook can't reach the "
+                            "position through the figure' \n \n";
+                    return 0;
+                  }
+                }
+                flag = 1;
+              }
+            }
+            if ((x1 == x2) && (y1 != y2)) {
+              if (y1 > y2) {
+                for (int i = y1 - 1; i > y2; i--) {
+                  if (table[x1][i] != ' ') {
+                    cout << "\n ERROR: Rook can't reach the "
+                            "position through the figure' \n \n";
+                    return 0;
+                  }
+                }
+                flag = 1;
+              }
+              if (y1 < y2) {
+                for (int i = y2 - 1; i > y1; i--) {
+                  if (table[x1][i] != ' ') {
+                    cout << "\n ERROR: Rook can't reach the "
+                            "position through the figure' \n \n";
+                    return 0;
+                  }
+                }
+                flag = 1;
+              }
+            }
+            break;
+        default:
             cout << "\nERROR\n";
             return 0;
         }
@@ -206,10 +253,57 @@ int Check(int x1, int x2, int y1, int y2, char table[][9], string turn)
             if ((x2 - x1 == 1) && (table[x2][y2] != ' ') && ((y2 - y1 == 1) || (y1 - y2 == 1)))
               flag = 1;
             break;
+          case 'r':
+              if ((y1 == y2) && (x1 != x2)) {
+                    if (x1 > x2) {
+                        for (int i = x1 - 1; i > x2; i--) {
+                            if (table[i][y1] != ' ') {
+                                cout << "\n ERROR: Rook can't reach the "
+                                        "position through the figure' \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                    if (x1 < x2) {
+                        for (int i = x2 - 1; i > x1; i--) {
+                            if (table[i][y1] != ' ') {
+                                cout << "\n ERROR: Rook can't reach the "
+                                        "position through the figure' \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+                if ((x1 == x2) && (y1 != y2)) {
+                    if (y1 > y2) {
+                        for (int i = y1 - 1; i > y2; i--) {
+                            if (table[x1][i] != ' ') {
+                                cout << "\n ERROR: Rook can't reach the "
+                                        "position through the figure' \n \n";
+                                return 0;
+                            }
+                        }
+                      flag = 1;
+                    }
+                    if (y1 < y2) {
+                        for (int i = y2 - 1; i > y1; i--) {
+                            if (table[x1][i] != ' ') {
+                                cout << "\n ERROR: Rook can't reach the "
+                                        "position through the figure' \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+              break;
           default:
             cout << "\nERROR\n";
             return 0;
         }
+
     }
     return flag;
 }
