@@ -332,7 +332,106 @@ int Check(int x1, int x2, int y1, int y2, char table[][9])
                         }
                         break;
 
-                        
+                        case 'Q':
+            if (CheckFriend(x2, y2, table)) {
+                if ((y1 == y2) && (x1 != x2)) {
+                    if (x1 > x2) {
+                        for (int i = x1 - 1; i > x2; i--) {
+                            if (table[i][y1] != ' ') {
+                                cout << "\n ERROR: Queen can't reach the "
+                                        "position through the figure \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                    if (x1 < x2) {
+                        for (int i = x2 - 1; i > x1; i--) {
+                            if (table[i][y1] != ' ') {
+                                cout << "\n ERROR: Queen can't reach the "
+                                        "position through the figure \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+                if ((x1 == x2) && (y1 != y2)) {
+                    if (y1 > y2) {
+                        for (int i = y1 - 1; i > y2; i--) {
+                            if (table[x1][i] != ' ') {
+                                cout << "\n ERROR: Queen can't reach the "
+                                        "position through the figure \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                    if (y1 < y2) {
+                        for (int i = y2 - 1; i > y1; i--) {
+                            if (table[x1][i] != ' ') {
+                                cout << "\n ERROR: Queen can't reach the "
+                                        "position through the figure \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+                if ((y2 < y1) && (x2 < x1)) {
+                    if (y1 - y2 == x1 - x2) {
+                        for (int i = y1 - 1, v = x1 - 1; i > y2 && v > x2;
+                             i--, v--) {
+                            if (table[v][i] != ' ') {
+                                cout << "\n ERROR: Queen can't reach the "
+                                        "position through the figure \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+                if ((y2 < y1) && (x2 > x1)) {
+                    if (y1 - y2 == x2 - x1) {
+                        for (int i = y1 - 1, v = x1 + 1; i > y2 && v < x2;
+                             i--, v++) {
+                            if (table[v][i] != ' ') {
+                                cout << "\n ERROR: Queen can't reach the "
+                                        "position through the figure \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+                if ((y2 > y1) && (x2 < x1)) {
+                    if (y2 - y1 == x1 - x2) {
+                        for (int i = y1 + 1, v = x1 - 1; i < y2 && v > x2;
+                             i++, v--) {
+                            if (table[v][i] != ' ') {
+                                cout << "\n ERROR: Queen can't reach the "
+                                        "position through the figure \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+                if ((y2 > y1) && (x2 > x1)) {
+                    if (y2 - y1 == x2 - x1) {
+                        for (int i = y1 + 1, v = x1 + 1; i < y2 && v < x2;
+                             i++, v++) {
+                            if (table[v][i] != ' ') {
+                                cout << "\n ERROR: Queen can't reach the "
+                                        "position through the figure \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+            }
+            break;
 
         default:
             cout << "\nERROR\n";
@@ -480,6 +579,107 @@ int Check(int x1, int x2, int y1, int y2, char table[][9])
                 }
             }
             break;
+
+            case 'q':
+                        if (CheckFriend(x2, y2, table)) {
+                            if ((y1 == y2) && (x1 != x2)) {
+                                if (x1 > x2) {
+                                    for (int i = x1 - 1; i > x2; i--) {
+                                        if (table[i][y1] != ' ') {
+                                            cout << "\n ERROR: Queen can't reach the "
+                                                    "position through the figure \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                                if (x1 < x2) {
+                                    for (int i = x2 - 1; i > x1; i--) {
+                                        if (table[i][y1] != ' ') {
+                                            cout << "\n ERROR: Queen can't reach the "
+                                                    "position through the figure \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                            }
+                            if ((x1 == x2) && (y1 != y2)) {
+                                if (y1 > y2) {
+                                    for (int i = y1 - 1; i > y2; i--) {
+                                        if (table[x1][i] != ' ') {
+                                            cout << "\n ERROR: Queen can't reach the "
+                                                    "position through the figure \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                                if (y1 < y2) {
+                                    for (int i = y2 - 1; i > y1; i--) {
+                                        if (table[x1][i] != ' ') {
+                                            cout << "\n ERROR: Queen can't reach the "
+                                                    "position through the figure \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                            }
+                          if ((y2 < y1) && (x2 < x1)) {
+                                if (y1 - y2 == x1 - x2) {
+                                    for (int i = y1 - 1, v = x1 - 1; i > y2 && v > x2;
+                                         i--, v--) {
+                                        if (table[v][i] != ' ') {
+                                            cout << "\n ERROR: Queen can't reach the "
+                                                    "position through the figure \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                            }
+                            if ((y2 < y1) && (x2 > x1)) {
+                                if (y1 - y2 == x2 - x1) {
+                                    for (int i = y1 - 1, v = x1 + 1; i > y2 && v < x2;
+                                         i--, v++) {
+                                        if (table[v][i] != ' ') {
+                                            cout << "\n ERROR: Queen can't reach the "
+                                                    "position through the figure \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                            }
+                            if ((y2 > y1) && (x2 < x1)) {
+                                if (y2 - y1 == x1 - x2) {
+                                    for (int i = y1 + 1, v = x1 - 1; i < y2 && v > x2;
+                                         i++, v--) {
+                                        if (table[v][i] != ' ') {
+                                            cout << "\n ERROR: Queen can't reach the "
+                                                    "position through the figure \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                            }
+                            if ((y2 > y1) && (x2 > x1)) {
+                                if (y2 - y1 == x2 - x1) {
+                                    for (int i = y1 + 1, v = x1 + 1; i < y2 && v < x2;
+                                         i++, v++) {
+                                        if (table[v][i] != ' ') {
+                                            cout << "\n ERROR: Queen can't reach the "
+                                                    "position through the figure \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                            }
+                        }
+                        break;
 
           default:
             cout << "\nERROR\n";
