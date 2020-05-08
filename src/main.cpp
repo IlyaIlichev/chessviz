@@ -1,9 +1,5 @@
 #include "functions.h"
 
-
-
-
-
 int main()
 {
   char table[9][9] = {{'8', 'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
