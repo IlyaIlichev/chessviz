@@ -17,8 +17,8 @@ TEST(Pawn, WhitePawn_forward)
 {
     int x1 = 6, x2 = 5;
     int y1 = 4, y2 = 4;
-    team = 0
-    int result = Check(x1, x2, y1, y2, pole);
+    team = 0;
+    int result = Check(x1, x2, y1, y2, table);
     int expected = 1;
     EXPECT_EQ(expected, result);
 }
@@ -27,9 +27,9 @@ TEST(Pawn, WhitePawn_wrong)
 {
     int x1 = 6, x2 = 3;
     int y1 = 4, y2 = 4;
-    team = 0
-    int result = Check(x1, x2, y1, y2, pole);
-    int expected = 1;
+    team = 0;
+    int result = Check(x1, x2, y1, y2, table);
+    int expected = 0;
     EXPECT_EQ(expected, result);
 }
 
