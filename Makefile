@@ -7,3 +7,6 @@ all:
 
 clean:
 	rm build/*.o
+
+run:
+	bin/main
