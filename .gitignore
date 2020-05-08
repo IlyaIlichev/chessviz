@@ -1,2 +1,4 @@
 *.o
 bin/main
+bin/test
+build/libgtest.a
