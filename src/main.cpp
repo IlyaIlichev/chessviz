@@ -12,5 +12,8 @@ int main()
                    {'1', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
                    {' ', 'a', '6', 'c', 'd', 'e', 'f', 'g', 'h'}};
     int team = 0;
-    drawtable(table);
+    while(true){
+      drawtable(table);
+      move(table);
+    }
 }

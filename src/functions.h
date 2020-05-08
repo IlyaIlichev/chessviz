@@ -6,3 +6,4 @@
 using namespace std;
 
 void drawtable(char table[][9]);
+void move(char table[][9]);
