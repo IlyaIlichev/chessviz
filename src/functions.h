@@ -5,4 +5,4 @@
 
 using namespace std;
 
-void drawtable();
+void drawtable(char table[][9]);
