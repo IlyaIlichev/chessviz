@@ -146,15 +146,12 @@ void move(char table[][9])
       return;
     }
     if(Check(x1,x2,y1,y2,table,turn)){
-      if (table[x1][y1] == 'P') {
-        table[x2][y2] = 'P';
-        table[x1][y1] = ' ';
-      }
+      table[x2][y2] = table[x1][y1];
+      table[x1][y1] = ' ';
+      if(team==0)
+        team = 1;
       else
-        if (table[x1][y1] == 'p') {
-          table[x2][y2] = 'p';
-          table[x1][y1] = ' ';
-        }
+        team = 0;
     }
 }
 
@@ -165,49 +162,54 @@ int Check(int x1, int x2, int y1, int y2, char table[][9], string turn)
         cout << "\nERROR\n";
         return 0;
     }
-    switch (table[x1][y1]) {
-    case ' ':
-        cout << "\nERROR\n";
-        return 0;
-
-    case 'P':
-        if ((y1 == y2) && (x1 - x2 == 1) && (table[x2][y2] == ' '))
-            flag = 1;
-        if ((y1 == y2) && (x1 - x2 == 2) && (x1 == 6)
-            && (table[x2][y2] == ' ')) {
-            if (table[x2 + 1][y2] == ' ') {
+    switch (team) {
+      case 0:
+        switch (table[x1][y1]) {
+          case ' ':
+            cout << "\nERROR\n";
+            return 0;
+          case 'P':
+            if ((y1 == y2) && (x1 - x2 == 1) && (table[x2][y2] == ' '))
+              flag = 1;
+            if ((y1 == y2) && (x1 - x2 == 2) && (x1 == 6) && (table[x2][y2] == ' ')) {
+              if (table[x2 + 1][y2] == ' ') {
                 flag = 1;
-            } else {
+              } else {
                 cout << "\nERROR\n";
                 return 0;
+              }
             }
+            if ((x1 - x2 == 1) && (table[x2][x2] != ' ') && ((y1 - y2 == 1) || (y2 - y1 == 1)))
+              flag = 1;
+            break;
+          default:
+            cout << "\nERROR\n";
+            return 0;
         }
-        if ((x1 - x2 == 1) && (table[x2][x2] != ' ')
-            && ((y1 - y2 == 1) || (y2 - y1 == 1)))
-            flag = 1;
         break;
-
-    case 'p':
-        if ((y1 == y2) && (x2 - x1 == 1) && (table[x2][y2] == ' '))
-            flag = 1;
-        if ((y1 == y2) && (x2 - x1 == 2) && (x1 == 1)
-            && (table[x2][y2] == ' ')) {
-            if (table[x2 - 1][y2] == ' ') {
+      case 1:
+        switch (table[x1][y1]) {
+          case ' ':
+            cout << "\nERROR\n";
+            return 0;
+          case 'p':
+            if ((y1 == y2) && (x2 - x1 == 1) && (table[x2][y2] == ' '))
+              flag = 1;
+            if ((y1 == y2) && (x2 - x1 == 2) && (x1 == 1) && (table[x2][y2] == ' ')) {
+              if (table[x2 - 1][y2] == ' ') {
                 flag = 1;
-            } else {
+              } else {
                 cout << "\nERROR\n";
                 return 0;
+              }
             }
+            if ((x2 - x1 == 1) && (table[x2][y2] != ' ') && ((y2 - y1 == 1) || (y1 - y2 == 1)))
+              flag = 1;
+            break;
+          default:
+            cout << "\nERROR\n";
+            return 0;
         }
-        if ((x2 - x1 == 1) && (table[x2][y2] != ' ')
-            && ((y2 - y1 == 1) || (y1 - y2 == 1)))
-            flag = 1;
-        break;
-
-    default:
-        flag = 1;
-        break;
     }
-
     return flag;
 }
