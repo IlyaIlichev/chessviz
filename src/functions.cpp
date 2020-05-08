@@ -155,6 +155,32 @@ void move(char table[][9])
     }
 }
 
+int CheckFriend(int x2, int y2, char table[][9])
+{
+    int flag = 1;
+    switch (team) {
+    case 0:
+        if ((table[x2][y2] == 'P') || (table[x2][y2] == 'R')
+            || (table[x2][y2] == 'N') || (table[x2][y2] == 'B')
+            || (table[x2][y2] == 'Q') || (table[x2][y2] == 'K')) {
+            cout << "\n ERROR: You can't move your figure on your figures \n "
+                    "\n";
+            flag = 0;
+        }
+        break;
+    case 1:
+        if ((table[x2][y2] == 'p') || (table[x2][y2] == 'r')
+            || (table[x2][y2] == 'n') || (table[x2][y2] == 'b')
+            || (table[x2][y2] == 'q') || (table[x2][y2] == 'k')) {
+            cout << "\n ERROR: You can't move your figure on your figures \n "
+                    "\n";
+            flag = 0;
+        }
+        break;
+    }
+    return flag;
+}
+
 int Check(int x1, int x2, int y1, int y2, char table[][9])
 {
     int flag = 0;
@@ -169,6 +195,7 @@ int Check(int x1, int x2, int y1, int y2, char table[][9])
             cout << "\nERROR\n";
             return 0;
           case 'P':
+            if (CheckFriend(x2, y2, table)) {
             if ((y1 == y2) && (x1 - x2 == 1) && (table[x2][y2] == ' '))
               flag = 1;
             if ((y1 == y2) && (x1 - x2 == 2) && (x1 == 6) && (table[x2][y2] == ' ')) {
@@ -181,9 +208,11 @@ int Check(int x1, int x2, int y1, int y2, char table[][9])
             }
             if ((x1 - x2 == 1) && (table[x2][x2] != ' ') && ((y1 - y2 == 1) || (y2 - y1 == 1)))
               flag = 1;
+            }
             break;
 
           case 'R':
+            if (CheckFriend(x2, y2, table)) {
             if ((y1 == y2) && (x1 != x2)) {
               if (x1 > x2) {
                 for (int i = x1 - 1; i > x2; i--) {
@@ -228,7 +257,83 @@ int Check(int x1, int x2, int y1, int y2, char table[][9])
                 flag = 1;
               }
             }
+          }
+          break;
+
+          case 'N':
+            if (CheckFriend(x2, y2, table)) {
+                if (((x2 == x1 - 2) && (y2 == y1 + 1))
+                    || ((x2 == x1 - 2) && (y2 == y1 - 1))
+                    || ((x2 == x1 + 2) && (y2 == y1 + 1))
+                    || ((x2 == x1 + 2) && (y2 == y1 - 1))
+                    || ((x2 == x1 - 1) && (y2 == y1 + 2))
+                    || ((x2 == x1 - 1) && (y2 == y1 - 2))
+                    || ((x2 == x1 + 1) && (y2 == y1 + 2))
+                    || ((x2 == x1 + 1) && (y2 == y1 - 2))) {
+                    flag = 1;
+                }
+            }
             break;
+
+            case 'B':
+                        if (CheckFriend(x2, y2, table)) {
+                            if ((y2 < y1) && (x2 < x1)) {
+                                if (y1 - y2 == x1 - x2) {
+                                    for (int i = y1 - 1, v = x1 - 1; i > y2 && v > x2;
+                                         i--, v--) {
+                                        if (table[v][i] != ' ') {
+                                            cout << "\n ERROR: Bishop can't reach the "
+                                                    "position through the figure' \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                            }
+                            if ((y2 < y1) && (x2 > x1)) {
+                                if (y1 - y2 == x2 - x1) {
+                                    for (int i = y1 - 1, v = x1 + 1; i > y2 && v < x2;
+                                         i--, v++) {
+                                        if (table[v][i] != ' ') {
+                                            cout << "\n ERROR: Bishop can't reach the "
+                                                    "position through the figure' \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                            }
+                            if ((y2 > y1) && (x2 < x1)) {
+                                if (y2 - y1 == x1 - x2) {
+                                    for (int i = y1 + 1, v = x1 - 1; i < y2 && v > x2;
+                                         i++, v--) {
+                                        if (table[v][i] != ' ') {
+                                            cout << "\n ERROR: Bishop can't reach the "
+                                                    "position through the figure' \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                            }
+                            if ((y2 > y1) && (x2 > x1)) {
+                                if (y2 - y1 == x2 - x1) {
+                                    for (int i = y1 + 1, v = x1 + 1; i < y2 && v < x2;
+                                         i++, v++) {
+                                        if (table[v][i] != ' ') {
+                                            cout << "\n ERROR: Bishop can't reach the "
+                                                    "position through the figure' \n \n";
+                                            return 0;
+                                        }
+                                    }
+                                    flag = 1;
+                                }
+                            }
+                        }
+                        break;
+
+                        
+
         default:
             cout << "\nERROR\n";
             return 0;
@@ -240,6 +345,7 @@ int Check(int x1, int x2, int y1, int y2, char table[][9])
             cout << "\nERROR\n";
             return 0;
           case 'p':
+            if (CheckFriend(x2, y2, table)) {
             if ((y1 == y2) && (x2 - x1 == 1) && (table[x2][y2] == ' '))
               flag = 1;
             if ((y1 == y2) && (x2 - x1 == 2) && (x1 == 1) && (table[x2][y2] == ' ')) {
@@ -252,8 +358,10 @@ int Check(int x1, int x2, int y1, int y2, char table[][9])
             }
             if ((x2 - x1 == 1) && (table[x2][y2] != ' ') && ((y2 - y1 == 1) || (y1 - y2 == 1)))
               flag = 1;
+            }
             break;
           case 'r':
+            if (CheckFriend(x2, y2, table)) {
               if ((y1 == y2) && (x1 != x2)) {
                     if (x1 > x2) {
                         for (int i = x1 - 1; i > x2; i--) {
@@ -298,7 +406,81 @@ int Check(int x1, int x2, int y1, int y2, char table[][9])
                         flag = 1;
                     }
                 }
+              }
               break;
+
+              case 'n':
+                if (CheckFriend(x2, y2, table)) {
+                    if (((x2 == x1 - 2) && (y2 == y1 + 1))
+                        || ((x2 == x1 - 2) && (y2 == y1 - 1))
+                        || ((x2 == x1 + 2) && (y2 == y1 + 1))
+                        || ((x2 == x1 + 2) && (y2 == y1 - 1))
+                        || ((x2 == x1 - 1) && (y2 == y1 + 2))
+                        || ((x2 == x1 - 1) && (y2 == y1 - 2))
+                        || ((x2 == x1 + 1) && (y2 == y1 + 2))
+                        || ((x2 == x1 + 1) && (y2 == y1 - 2))) {
+                        flag = 1;
+                    }
+                }
+                break;
+
+                case 'b':
+            if (CheckFriend(x2, y2, table)) {
+                if ((y2 < y1) && (x2 < x1)) {
+                    if (y1 - y2 == x1 - x2) {
+                        for (int i = y1 - 1, v = x1 - 1; i > y2 && v > x2;
+                             i--, v--) {
+                            if (table[v][i] != ' ') {
+                                cout << "\n ERROR: Bishop can't reach the "
+                                        "position through the figure' \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+                if ((y2 < y1) && (x2 > x1)) {
+                    if (y1 - y2 == x2 - x1) {
+                        for (int i = y1 - 1, v = x1 + 1; i > y2 && v < x2;
+                             i--, v++) {
+                            if (table[v][i] != ' ') {
+                                cout << "\n ERROR: Bishop can't reach the "
+                                        "position through the figure' \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+                if ((y2 > y1) && (x2 < x1)) {
+                    if (y2 - y1 == x1 - x2) {
+                        for (int i = y1 + 1, v = x1 - 1; i < y2 && v > x2;
+                             i++, v--) {
+                            if (table[v][i] != ' ') {
+                                cout << "\n ERROR: Bishop can't reach the "
+                                        "position through the figure' \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+                if ((y2 > y1) && (x2 > x1)) {
+                    if (y2 - y1 == x2 - x1) {
+                        for (int i = y1 + 1, v = x1 + 1; i < y2 && v < x2;
+                             i++, v++) {
+                            if (table[v][i] != ' ') {
+                                cout << "\n ERROR: Bishop can't reach the "
+                                        "position through the figure' \n \n";
+                                return 0;
+                            }
+                        }
+                        flag = 1;
+                    }
+                }
+            }
+            break;
+
           default:
             cout << "\nERROR\n";
             return 0;
