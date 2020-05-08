@@ -12,6 +12,7 @@ build/functions.o:
 	g++ -c -Wall src/functions.cpp -o  $@
 
 test: gtestlib bin/test
+	bin/test
 
 gtestlib:
 	g++ -std=c++11 -isystem ${GTESTDIR}/include -I ${GTESTDIR} -pthread -c ${GTESTDIR}/src/gtest-all.cc -o build/gtest-all.o
@@ -22,8 +23,6 @@ bin/test: build/test.o build/functions.o
 
 build/test.o:
 	g++ -std=c++11 -c -Wall test/test.cpp -I $(GTESTDIR)/include -o $@
-
-
 
 clean:
 	rm build/*.o
